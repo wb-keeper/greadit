@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Icons } from "@/components/Icons";
+import Icons from "@/components/Icons";
 import { buttonVariants } from "@/components/ui/Button";
 
 const Navbar = () => {
