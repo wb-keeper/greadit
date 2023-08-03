@@ -51,7 +51,7 @@ model User {
   createdSubgreadits Subgreadit[]    @relation("CreatedBy")
   subscriptions     Subscription[]
   votes             Vote[]
-
+ 
   username String? @unique
 
   image       String?
