@@ -23,7 +23,7 @@ const Page = () => {
     },
     onError: (e) => {
       if (e instanceof AxiosError) {
-        if (e.response?.status === 404) {
+        if (e.response?.status === 409) {
           return toast({
             title: "Subgreadit already exists",
             description: "Please choose a different subgreadit name",

@@ -6,12 +6,12 @@ import { z } from "zod";
 export async function POST(req: Request) {
   try {
     const session = await getAuthSession();
-    console.log(!session?.user);
+
     if (!session?.user) {
-      console.log(222);
       return new Response("Unauthorized", { status: 404 });
     }
     const body = await req.json();
+
     const { name } = SubgreaditValidator.parse(body);
     const subgreaditExists = await db.subgreadit.findFirst({
       where: {
@@ -32,8 +32,6 @@ export async function POST(req: Request) {
     });
     return new Response(subgreadit.name);
   } catch (e) {
-    console.log(123);
-    console.log(e);
     if (e instanceof z.ZodError) {
       return new Response(e.message, { status: 422 });
     }
