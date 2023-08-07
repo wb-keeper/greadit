@@ -1,6 +1,7 @@
 import { FC, ReactNode } from "react";
 import { getAuthSession } from "@/lib/auth";
 import { db } from "@/lib/db";
+import { notFound } from "next/navigation";
 
 interface LayoutProps {
   children: ReactNode;
@@ -23,6 +24,27 @@ const Layout: ({
           author: true,
           votes: true,
         },
+      },
+    },
+  });
+  const subscription = !session?.user
+    ? undefined
+    : await db.subscription.findFirst({
+        where: {
+          subgreadit: {
+            name: slug,
+          },
+          user: {
+            id: session.user.id,
+          },
+        },
+      });
+  const isSubscribed = !!subscription;
+  if (!subgreadit) return notFound();
+  const memberCount = await db.subscription.count({
+    where: {
+      subgreadit: {
+        name: slug,
       },
     },
   });
