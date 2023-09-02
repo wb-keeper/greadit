@@ -31,7 +31,7 @@ const Page = async ({ params }: PageProps) => {
   if (!subgreadit) return notFound();
   return (
     <>
-      <h1 className="font-bold text-3xl md:text-4xl h-14">
+      <h1 className="font-bold text-3xl md:text-4xl md h-14">
         r/{subgreadit.name}
       </h1>
       <MiniCreatePost session={session} />

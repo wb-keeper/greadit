@@ -21,6 +21,7 @@ const Page = () => {
       const { data } = await axios.post("/api/subgreadit", payload);
       return data as string;
     },
+
     onError: (e) => {
       if (e instanceof AxiosError) {
         if (e.response?.status === 409) {
