@@ -4,6 +4,8 @@ import { db } from "@/lib/db";
 import { notFound } from "next/navigation";
 import dateFormat from "dateformat";
 import SubscribeLeaveToggle from "@/components/SubscribeLeaveToggle";
+import Link from "next/link";
+import { buttonVariants } from "@/components/ui/Button";
 
 interface LayoutProps {
   children: ReactNode;
@@ -88,8 +90,18 @@ const Layout: ({
                 <SubscribeLeaveToggle
                   subgreaditId={subgreadit.id}
                   subgreaditName={subgreadit.name}
+                  isSubscribed={isSubscribed}
                 />
               ) : null}
+              <Link
+                href={`r/${slug}/submit`}
+                className={buttonVariants({
+                  variant: "outline",
+                  className: "w-full mb-6",
+                })}
+              >
+                Create Post
+              </Link>
             </dl>
           </div>
         </div>

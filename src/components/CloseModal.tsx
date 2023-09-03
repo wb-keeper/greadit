@@ -8,7 +8,7 @@ const CloseModal = () => {
   return (
     <Button
       variant="subtle"
-      className="h-6 w-6 p-0 rounded-md"
+      className="h-6 w-6 p-0 p rounded-md"
       onClick={() => router.back()}
       caria-label="close modal"
     >

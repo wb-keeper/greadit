@@ -29,6 +29,7 @@ export default function RootLayout({
     >
       <Providers>
         <body className="min-h-screen pt-12 bg-slate-50 antialiased">
+          {/*@ts-expect-error*/}
           <Navbar />
           {authModal}
           <div className="container max-w-7xl mx-auto h-full pt-12">
