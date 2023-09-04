@@ -28,7 +28,7 @@ const Page = async ({ params }: PageProps) => {
           </p>
         </div>
       </div>
-      <Editor />
+      <Editor subgreaditId={subgreadit.id} />
       <div className="w-full flex justify-end">
         <Button type="submit" className="w-full" form="subgreadit-post-form">
           Post
