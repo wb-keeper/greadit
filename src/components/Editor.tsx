@@ -53,6 +53,14 @@ const Editor: FC<EditorProps> = ({ subgreaditId }) => {
               endpoint: "/api/link",
             },
           },
+          image: {
+            class: ImageTool,
+            config: {
+              uploader: {
+                async uploadByFile(file: File) {},
+              },
+            },
+          },
         },
       });
     }
