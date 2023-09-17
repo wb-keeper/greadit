@@ -36,7 +36,10 @@ const Page = async ({ params }: PageProps) => {
         r/{subgreadit.name}
       </h1>
       <MiniCreatePost session={session} />
-      <PostFeed />
+      <PostFeed
+        initialPosts={subgreadit.posts}
+        subgreaditName={subgreadit.name}
+      />
     </>
   );
 };
