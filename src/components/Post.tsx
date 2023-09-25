@@ -4,6 +4,9 @@ import { formatTimeToNow } from "@/lib/utils";
 import Link from "next/link";
 import { MessageSquare } from "lucide-react";
 import EditorOutput from "@/components/EditorOutput";
+import PostVoteClient from "@/components/post-vote/PostVoteClient";
+
+type PartialVote = Pick<Vote, "type">;
 interface PostProps {
   subgreaditName: string;
   post: Post & {
@@ -11,14 +14,27 @@ interface PostProps {
     votes: Vote[];
   };
   commentAmt: number;
+  votesAmt: number;
+  currentVote?: PartialVote;
 }
 
-const Post: FC<PostProps> = ({ subgreaditName, post, commentAmt }) => {
+const Post: FC<PostProps> = ({
+  subgreaditName,
+  post,
+  commentAmt,
+  votesAmt,
+  currentVote,
+}) => {
   const pRef = useRef<HTMLDivElement>(null);
 
   return (
     <div className="rounded-md bg-white shadow">
       <div className="px-6 py-4 flex justify-between">
+        <PostVoteClient
+          postId={post.id}
+          initialVote={currentVote?.type}
+          initialVotesAmt={votesAmt}
+        />
         <div className="w-0 flex-1">
           <div className="max-h-40 mt-1 text-xs text-gray-500">
             {subgreaditName ? (
@@ -45,7 +61,7 @@ const Post: FC<PostProps> = ({ subgreaditName, post, commentAmt }) => {
             className="relative text-sm max-h-40 w-full overflow-clip"
             ref={pRef}
           >
-            <EditorOutput />
+            <EditorOutput content={post.content} />
             {pRef.current?.clientHeight === 160 ? (
               <div className="absolute botton-0 left-0 h-24 w-full bg-gradient-to-t from-white to-transparent" />
             ) : null}
