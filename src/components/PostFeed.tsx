@@ -1,5 +1,5 @@
 "use client";
-import { FC, useRef } from "react";
+import {FC, useEffect, useRef} from "react";
 import { ExtendedPost } from "@/types/db";
 import { useIntersection } from "@mantine/hooks";
 import { useInfiniteQuery } from "@tanstack/react-query";
@@ -40,6 +40,11 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subgreaditName }) => {
       initialData: { pages: [initialPosts], pageParams: [1] },
     }
   );
+  useEffect(() => {
+    if (entry?.isIntersecting) {
+      fetchNextPage()
+    }
+  }, [entry, fetchNextPage])
   const posts = data?.pages.flatMap((page) => page) ?? initialPosts;
   return (
     <ul className="flex flex-col col-span-2 space-y-6">
@@ -56,7 +61,7 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subgreaditName }) => {
         );
         if (idx === posts.length - 1) {
           return (
-            <li key={post.id} ref={ref}>
+            <li key={post.id} ref={ref} className="1">
               <Post
                 currentVote={currentVote}
                 votesAmt={votesAmt}
@@ -68,13 +73,16 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subgreaditName }) => {
           );
         } else {
           return (
+
             <Post
+                key={post.id}
               currentVote={currentVote}
               votesAmt={votesAmt}
               commentAmt={post.comments.length}
               post={post}
               subgreaditName={post.subgreadit.name}
             />
+
           );
         }
       })}
