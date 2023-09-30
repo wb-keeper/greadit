@@ -8,12 +8,14 @@ const CustomFeed = async () => {
     const session = await getAuthSession()
     const followedCommunities = await db.subscription.findMany({
         where: {
+            //@ts-ignore
             userId: session?.user.id,
         },
         include: {
             subgreadit: true
         }
     })
+    console.log(followedCommunities)
     const posts = await db.post.findMany({
         where: {
             subgreadit: {
